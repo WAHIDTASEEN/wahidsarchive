@@ -1,0 +1,7 @@
+const json=(statusCode,body)=>({statusCode,headers:{'Content-Type':'application/json','Cache-Control':'no-store'},body:JSON.stringify(body)});
+export default async request=>{
+ const get=k=>globalThis.Netlify?.env?.get?.(k)||process.env[k]||'';if(request.method!=='GET')return json(405,{error:'Method not allowed.'});
+ const token=new URL(request.url).searchParams.get('token')||'';if(!/^[0-9a-f-]{36}$/i.test(token))return json(400,{error:'Invalid unsubscribe link.'});
+ const base=get('SUPABASE_URL').replace(/\/$/,'');const key=get('SUPABASE_SERVICE_ROLE_KEY');if(!base||!key)return json(503,{error:'Unsubscribe is temporarily unavailable.'});
+ try{const r=await fetch(`${base}/rest/v1/newsletter_subscribers?unsubscribe_token=eq.${encodeURIComponent(token)}`,{method:'PATCH',headers:{apikey:key,Authorization:`Bearer ${key}`,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({active:false,updated_at:new Date().toISOString()})});if(!r.ok)throw new Error();return {statusCode:200,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'},body:'<!doctype html><meta name="viewport" content="width=device-width"><title>Unsubscribed</title><body style="font:16px system-ui;background:#070817;color:#f5efff;max-width:560px;margin:12vh auto;padding:24px"><h1>You’re unsubscribed</h1><p>You will no longer receive new-material emails from Wahid’s Archive.</p></body>'};}catch{return json(500,{error:'Could not unsubscribe. Please try again.'})}
+};

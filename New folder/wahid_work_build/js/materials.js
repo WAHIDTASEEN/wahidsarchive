@@ -1,0 +1,3 @@
+const {esc}=window.WahidSite;const cats=['Lab Report','Assignment','Project','Notes','Past Paper','Question Bank','Formula Sheet','Presentation','Other'];
+async function run(){const box=document.getElementById('materialCategories');try{const rows=await WahidPublic.request('works?select=category&published=eq.true');box.innerHTML=cats.map(c=>{const n=(rows||[]).filter(x=>x.category===c).length;return `<a class="material-shelf-card" href="work.html?category=${encodeURIComponent(c)}"><span>${esc(c)}</span><b>${n}</b><small>Explore collection →</small></a>`}).join('')}catch(e){box.innerHTML=`<p class="muted">Unable to load collections: ${esc(e.message)}</p>`}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
