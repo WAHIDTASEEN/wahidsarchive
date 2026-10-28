@@ -1,0 +1,12 @@
+WORK / LIBRARY PAGE UPDATE
+
+Updated in this package:
+- Reworked work.html into the approved Academic Heritage library layout.
+- Added a refined navy/cream/burgundy/antique-gold visual treatment scoped to the Work page.
+- Added archive counts based on published records, course tiles based on real records, search, category filters, year filtering, sorting, and course filtering.
+- Preserved the existing public works API, cover metadata, individual material detail routes, file preview, download/open links, copy-link behavior, related materials, offline cache fallback, and current site navigation/theme toggle.
+- Responsive layout for tablet and mobile.
+
+No database schema or configuration changes are required for this page redesign. It uses the existing published works records and existing work_covers setting.
+
+Deploy the ZIP contents to the same Netlify site, replacing the existing site files. Extract it first or use Netlify's ZIP deploy workflow.

@@ -1,0 +1,10 @@
+{
+  "name":"Wahid Academic Atelier",
+  "short_name":"WAHID",
+  "description":"Wahid's personal academic archive, engineering toolkit and academic workspace.",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "background_color":"#07151a",
+  "theme_color":"#10243d",
+  "icons":[{"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
